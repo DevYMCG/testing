@@ -1,33 +1,26 @@
 from fastapi import FastAPI
-
-
-description= """
-## This is my Application created in FastAPI
-
-It has only one route "index"
-
-"""
+from config import setting
 
 tags = [
     {
         "name": "user",
-        "description": "These are my user, routes"
+        "description": "This is user route"
     },
     {
         "name": "product",
-        "description": "There are product routes"
+        "description": "This is product route"
     }
 ]
 
-app = FastAPI(title="My Application",
-              description=description,
-              version="0.0.1",
+app = FastAPI(
+              title=setting.TITLE,
+              description=setting.DESCRIPTION,
+              version=setting.VERSION,
               contact={
-                "name": "Yohana Contreras",
-                "email": "yohana.contrerasg@gmail.com"
+                "name": setting.NAME,
+                "email": setting.EMAIL
               },
-              openapi_tags=tags,
-              openapi_url="/api/v1/openapi.json")
+              openapi_tags=tags)
 
 @app.get("/user", tags=["user"])
 def index():
