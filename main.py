@@ -30,3 +30,7 @@ def index():
 @app.get("/product", tags=["product"])
 def get_product():
     return  {"Message": "hello Product"}
+
+@app.get('/getenvvar', tags=["config"])
+def get_envvars():
+    return {"database": setting.POSTGRES_URL}
