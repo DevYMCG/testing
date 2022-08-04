@@ -14,5 +14,6 @@ Base = declarative_base()
 def get_db()->Generator:
     try:
         db = sessionLocal()
+        yield db
     finally:
         db.close()
