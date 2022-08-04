@@ -39,3 +39,7 @@ def get_product():
 @app.get('/getenvvar', tags=["config"])
 def get_envvars():
     return {"database": setting.POSTGRES_URL}
+
+@app.post('/create_user')
+def create_user(n: int, ch: str ):
+    return "abc"
