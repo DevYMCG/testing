@@ -12,8 +12,8 @@ tags = [
         "description": "This is user route"
     },
     {
-        "name": "product",
-        "description": "This is product route"
+        "name": "item",
+        "description": "This is item route"
     }
 ]
 

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, Boolean
+from sqlalchemy import Column, ForeignKey, Integer, String, Boolean, Date
 from database import Base
 from sqlalchemy.orm import relationship
 
@@ -18,6 +18,7 @@ class Items(Base):
     id = Column(Integer, primary_key=True, index=True)
     title= Column(String, nullable=False, unique=True)
     description = Column(String)
+    date_posted = Column(Date)
     owner_id= Column(Integer, ForeignKey("users.id"))
 
     owner = relationship("User", back_populates="items")
