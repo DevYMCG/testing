@@ -1,3 +1,4 @@
+from typing import List
 from fastapi import Depends, APIRouter, HTTPException, status
 from database import get_db
 from sqlalchemy.orm import Session
@@ -15,6 +16,13 @@ def create_item(item: ItemCreate, db:Session=Depends(get_db)):
     db.commit()
     db.refresh(item)
     return item
+
+
+@router.get("/item/all", tags=["items"], response_model=List[ShowItem])
+def retrieve_all_items(db:Session=Depends(get_db)):
+    items = db.query(Items).all()
+    return items
+
 
 @router.get("/item/{id}", tags=["items"], response_model=ShowItem)
 def retrieve_item_by_id(id: int, db:Session=Depends(get_db)):
