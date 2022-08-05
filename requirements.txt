@@ -9,3 +9,5 @@ passlib[bcrypt]
 
 pytest
 requests
+
+pytest-cov
