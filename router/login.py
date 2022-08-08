@@ -21,5 +21,5 @@ def retrieve_token_after_authentication(form_data: OAuth2PasswordRequestForm=Dep
     if not Hasher.verify_password(form_data.password, user.password):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid Password")
     data = {"sub": form_data.username}
-    jwt_token = jwt.encode(data, setting.SECURITY_KEY, setting.ALGORITHM)
+    jwt_token = jwt.encode(data, setting.SECRET_KEY, setting.ALGORITHM)
     return {"access_token": jwt_token, "token_type": "bearer"}
