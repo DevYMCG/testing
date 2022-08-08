@@ -1,3 +1,4 @@
+import email
 from fastapi.testclient import TestClient
 
 from sqlalchemy import create_engine
@@ -11,6 +12,9 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from main import app
 from database import Base, get_db
+from config import setting
+from models import User
+from hashing import Hasher
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
 
@@ -35,3 +39,20 @@ def client():
     app.dependency_overrides[get_db] = override_get_db
     client = TestClient(app)
     yield client
+
+
+@pytest.fixture
+def header_token(client: TestClient):
+    test_email = setting.TEST_EMAIL
+    test_password = setting.TEST_PASS
+    db = TestingSessionLocal()
+    user = db.query(User).filter(User.email == test_email).first()
+    if user is None:
+        user = User(email= test_email, password= Hasher.get_hash_password(test_password))
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+    data = {"username":test_email, "password":test_password}
+    response = client.post("/login/token", data = data)
+    access_token = response.json()["access_token"]
+    return {"Authorization": f"Bearer {access_token}"}

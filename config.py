@@ -22,5 +22,9 @@ class Settings:
     DATABASE_URL = F"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DATABASE}"
     SECRET_KEY: str = os.getenv("SECRET_KEY")
     ALGORITHM = "HS256"
+    TEST_EMAIL = "testuser3@test.com"
+    TEST_PASS = "testuser1"
+    TEST_ITEM = "test item"
+    TEST_DESCRIPTION = "test item description"
 
 setting = Settings()
