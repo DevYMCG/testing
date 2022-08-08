@@ -11,3 +11,6 @@ pytest
 requests
 
 pytest-cov
+python-multipart
+
+python-jose
