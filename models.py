@@ -13,7 +13,7 @@ class User(Base):
     items = relationship("Items", back_populates="owner")
 
 class Items(Base):
-    __tablename__="Items"
+    __tablename__="items"
 
     id = Column(Integer, primary_key=True, index=True)
     title= Column(String, nullable=False, unique=True)
