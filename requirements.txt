@@ -17,3 +17,4 @@ python-jose
 jinja2
 
 alembic
+aiofiles
