@@ -7,14 +7,19 @@
 {% block content %}
     <div class="container">
         <h1>User Registration !!</h1>
-        <form>
+        {% for error in errors %}
+        <div class="alert danger alert-danger" role="danger">
+            {{error}}
+        </div>
+        {% endfor %}
+        <form method="POST">
             <div class="mb-3">
               <label for="email" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter Email">
+              <input type="email" required class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter Email">
             </div>
             <div class="mb-3">
               <label for="password"  class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" placeholder="Enter Password">
+              <input type="password" required class="form-control" name="password" placeholder="Enter Password">
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
