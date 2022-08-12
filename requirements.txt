@@ -18,3 +18,5 @@ jinja2
 
 alembic
 aiofiles
+
+black

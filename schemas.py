@@ -3,19 +3,22 @@ from pydantic import BaseModel, EmailStr
 
 
 class UserCreate(BaseModel):
-    email:EmailStr
+    email: EmailStr
     password: str
+
 
 class ShowUser(BaseModel):
     email: EmailStr
     is_active: bool
 
     class Config:
-        orm_mode=True
+        orm_mode = True
+
 
 class ItemCreate(BaseModel):
     title: str
     description: str
+
 
 class ShowItem(BaseModel):
     title: str
@@ -23,4 +26,4 @@ class ShowItem(BaseModel):
     date_posted: date
 
     class Config:
-        orm_mode=True
+        orm_mode = True

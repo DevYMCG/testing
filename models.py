@@ -2,8 +2,9 @@ from sqlalchemy import Column, ForeignKey, Integer, String, Boolean, Date
 from database import Base
 from sqlalchemy.orm import relationship
 
+
 class User(Base):
-    __tablename__="users"
+    __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, unique=True, nullable=False, index=True)
@@ -12,13 +13,14 @@ class User(Base):
 
     items = relationship("Items", back_populates="owner")
 
+
 class Items(Base):
-    __tablename__="items"
+    __tablename__ = "items"
 
     id = Column(Integer, primary_key=True, index=True)
-    title= Column(String, nullable=False, unique=True)
+    title = Column(String, nullable=False, unique=True)
     description = Column(String)
     date_posted = Column(Date)
-    owner_id= Column(Integer, ForeignKey("users.id"))
+    owner_id = Column(Integer, ForeignKey("users.id"))
 
     owner = relationship("User", back_populates="items")

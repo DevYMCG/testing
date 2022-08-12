@@ -7,12 +7,14 @@ from sqlalchemy.orm import Session
 
 router = APIRouter()
 
+
 @router.get("/user", tags=["user"])
 def index():
-    return  {"Message": "hello word"}
+    return {"Message": "hello word"}
 
-@router.post('/users', tags=["user"], response_model=ShowUser)
-def create_user(user: UserCreate, db:Session=Depends(get_db)):
+
+@router.post("/users", tags=["user"], response_model=ShowUser)
+def create_user(user: UserCreate, db: Session = Depends(get_db)):
     user = User(email=user.email, password=Hasher.get_hash_password(user.password))
     db.add(user)
     db.commit()

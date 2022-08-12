@@ -36,6 +36,7 @@ def client():
             yield db
         finally:
             db.close()
+
     app.dependency_overrides[get_db] = override_get_db
     client = TestClient(app)
     yield client
@@ -48,11 +49,11 @@ def header_token(client: TestClient):
     db = TestingSessionLocal()
     user = db.query(User).filter(User.email == test_email).first()
     if user is None:
-        user = User(email= test_email, password= Hasher.get_hash_password(test_password))
+        user = User(email=test_email, password=Hasher.get_hash_password(test_password))
         db.add(user)
         db.commit()
         db.refresh(user)
-    data = {"username":test_email, "password":test_password}
-    response = client.post("/login/token", data = data)
+    data = {"username": test_email, "password": test_password}
+    response = client.post("/login/token", data=data)
     access_token = response.json()["access_token"]
     return {"Authorization": f"Bearer {access_token}"}
